@@ -1,23 +1,503 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <!-- JSON-LD 구조화 데이터: FAQPage (네이버 검색 스니펫 최적화) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "분리형 원룸 인테리어의 장점은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "분리형 원룸 인테리어는 주거 공간을 침실, 거실, 주방 등으로 명확하게 구분하여 공간 활용도를 높이고, 심리적인 안정감을 제공하며 사생활 보호에 효과적입니다. 특히 좁은 공간에서도 쾌적함과 효율성을 동시에 확보할 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "분리형 원룸 인테리어를 위한 가구 추천을 해주세요.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "공간 활용도를 극대화할 수 있는 다기능 가구(멀티펑션 가구)가 필수적입니다. 접이식 테이블, 수납형 침대, 파티션 역할을 겸하는 책장이나 수납장 등이 있습니다. 이동식 가구를 활용하여 필요에 따라 공간을 유연하게 재구성하는 것도 좋은 방법입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "분리형 원룸 인테리어 비용은 평균 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "분리형 원룸 인테리어 비용은 시공 범위(전체 리모델링 vs. 부분 셀프 인테리어), 가구 선택, 자재 등급에 따라 크게 달라집니다. 가구 배치 및 소품 위주의 셀프 인테리어는 100~300만원 선에서 가능하며, 전문 업체를 통한 전체 시공은 500~1,000만원 이상 소요될 수 있습니다. 정확한 견적은 전문가 상담을 통해 확인하는 것이 좋습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "분리형 원룸 인테리어를 할 때 주의해야 할 점이 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "가장 중요한 것은 '환기'와 '동선'입니다. 공간을 분리할 때 공기 순환을 막지 않도록 파티션을 적절히 배치해야 하며, 이동 경로를 방해하지 않도록 가구를 배치해야 합니다. 또한, 좁은 공간에서는 밝은 색상을 활용하여 시각적으로 넓어 보이게 하는 것이 효과적입니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* 기본 색상 정의 및 폰트 설정 */
+        :root {
+            --primary-color: #3B5F8A; /* 짙은 블루/네이비 (신뢰감) */
+            --secondary-color: #6A9C8B; /* 차분한 그린 (안정감) */
+            --accent-color: #F8B400; /* 골드 옐로우 (활력) */
+            --text-color: #333333; /* 기본 텍스트 색상 */
+            --bg-light: #F9F9F9; /* 연한 배경 */
+            --bg-dark: #EAEAEA; /* 강조 배경 */
+            --border-color: #E0E0E0; /* 경계선 색상 */
+            --btn-cta: #D9534F; /* CTA 버튼 색상 (강렬한 레드) */
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+        /* 공통 스타일 */
+        body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; background-color: var(--bg-light); color: var(--text-color); line-height: 1.8; font-size: 16px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        a { text-decoration: none; color: var(--primary-color); }
+        a:hover { text-decoration: underline; }
+        h1, h2, h3, h4 { margin-top: 0; font-weight: 700; color: var(--primary-color); }
+        p { margin-bottom: 20px; }
+        ul, ol { margin-bottom: 20px; padding-left: 20px; }
+
+        /* 헤더: 로고 및 내비게이션 */
+        header { background-color: #ffffff; padding: 20px 0; border-bottom: 1px solid var(--border-color); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        header h1 { margin: 0; font-size: 2.2em; color: var(--primary-color); }
+        header h1 a { font-weight: 700; }
+        nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a { color: var(--primary-color); font-weight: 500; font-size: 1.1em; transition: color 0.3s; }
+        nav ul li a:hover { color: var(--secondary-color); text-decoration: none; }
+
+        /* 히어로 섹션 */
+        .hero { background: linear-gradient(135deg, var(--primary-color) 0%, #4a74a4 100%); color: #ffffff; text-align: center; padding: 100px 20px; position: relative; overflow: hidden; }
+        .hero h1 { font-size: 3.5em; margin-bottom: 15px; font-weight: 700; line-height: 1.3; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .hero p { font-size: 1.4em; margin-bottom: 40px; font-weight: 300; line-height: 1.5; opacity: 0.9; }
+
+        /* CTA 버튼 */
+        .cta-btn { background-color: var(--btn-cta); color: #fff; padding: 18px 40px; font-size: 1.3em; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; transition: background-color 0.3s, transform 0.2s; box-shadow: 0 6px 12px rgba(0,0,0,0.2); text-decoration: none; display: inline-block; }
+        .cta-btn:hover { background-color: #c94643; transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
+
+        /* 인테리어 견적 폼 */
+        .compare-form-box { background-color: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 50px; position: relative; z-index: 10; width: 80%; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .compare-form-box h2 { color: var(--primary-color); text-align: center; margin-bottom: 25px; font-size: 1.8em; }
+        .compare-form-box p { font-size: 1.1em; color: #666; text-align: center; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #444; font-size: 1.05em; }
+        .form-group input, .form-group select { width: 100%; padding: 14px; border: 1px solid var(--border-color); border-radius: 8px; box-sizing: border-box; font-size: 1em; }
+
+        /* 섹션 공통 스타일 */
+        .content-section { padding: 80px 0; background-color: #ffffff; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .content-section.gray-bg { background-color: var(--bg-light); }
+        .content-section h2 { font-size: 2.8em; color: var(--primary-color); border-bottom: 3px solid var(--secondary-color); padding-bottom: 15px; margin-bottom: 40px; text-align: center; }
+        .content-section h3 { font-size: 1.8em; color: var(--primary-color); margin-top: 40px; margin-bottom: 20px; font-weight: 600; }
+
+        /* 장점/단점 그리드 */
+        .grid-container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px; margin-top: 30px; }
+        .grid-item { width: calc(50% - 15px); padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); background-color: #ffffff; transition: transform 0.3s ease-in-out; }
+        .grid-item:hover { transform: translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+        .grid-item h4 { font-size: 1.5em; color: var(--secondary-color); margin-bottom: 15px; display: flex; align-items: center; }
+        .grid-item h4 svg { margin-right: 10px; }
+        .grid-item p { color: #555; font-size: 1em; }
+
+        /* 인테리어 팁 섹션 (이미지+텍스트) */
+        .tip-layout { display: flex; justify-content: space-between; margin-bottom: 40px; }
+        .tip-layout-text { width: calc(50% - 20px); }
+        .tip-layout-image { width: calc(50% - 20px); }
+        .tip-layout-image img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+        /* 통계 표 (Table) */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 40px; }
+        .data-table th, .data-table td { border: 1px solid var(--border-color); padding: 15px; text-align: center; font-size: 1em; }
+        .data-table th { background-color: var(--primary-color); color: #ffffff; font-weight: 500; }
+        .data-table tr:nth-child(even) { background-color: var(--bg-light); }
+        .data-table tr:hover { background-color: #f1f1f1; }
+
+        /* 키워드 리스트 (자동 완성/연관 검색어) */
+        .keyword-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; margin-top: 30px; }
+        .keyword-list li { background-color: var(--secondary-color); color: #fff; padding: 10px 20px; margin: 6px; border-radius: 25px; font-weight: 500; font-size: 0.95em; cursor: pointer; transition: background-color 0.3s; }
+        .keyword-list li:hover { background-color: #5a8b7a; }
+
+        /* FAQ 섹션 */
+        .faq-item { border-bottom: 1px solid var(--border-color); padding: 20px 0; }
+        .faq-item h3 { cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-color); margin: 0; font-weight: 500; font-size: 1.2em; transition: color 0.3s; }
+        .faq-item h3:hover { color: var(--secondary-color); }
+        .faq-item h3::after { content: '+'; font-size: 1.5em; color: var(--secondary-color); font-weight: 300; transition: transform 0.3s; }
+        .faq-item.active h3::after { content: '-'; transform: rotate(180deg); }
+        .faq-item p { display: none; padding-top: 15px; color: #555; font-size: 1.05em; line-height: 1.7; }
+        .faq-item.active p { display: block; }
+
+        /* 푸터 */
+        footer { background-color: var(--primary-color); color: #ffffff; text-align: center; padding: 40px 20px; font-size: 0.9em; line-height: 1.6; }
+        footer a { color: #ffffff; text-decoration: none; margin: 0 10px; opacity: 0.8; }
+        footer a:hover { opacity: 1; text-decoration: underline; }
+
+        /* 반응형 디자인 */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 2.5em; }
+            .hero p { font-size: 1.2em; }
+            .grid-item { width: 100%; }
+            .tip-layout { flex-direction: column; }
+            .tip-layout-text, .tip-layout-image { width: 100%; }
+            .tip-layout-image { margin-top: 20px; }
+            .content-section h2 { font-size: 2em; }
+        }
+        @media (max-width: 600px) {
+            header .container { flex-direction: column; text-align: center; }
+            nav ul { justify-content: center; margin-top: 15px; }
+            nav ul li { margin: 0 10px; }
+            .compare-form-box { width: 95%; padding: 25px; }
+            .data-table th, .data-table td { font-size: 0.9em; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1><a href="/">분리형원룸인테리어</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="#장점과단점">장단점 분석</a></li>
+                    <li><a href="#비용과견적">비용 견적</a></li>
+                    <li><a href="#인테리어팁">인테리어 팁</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <!-- 히어로 섹션: 핵심 키워드 및 CTA -->
+        <section class="hero">
+            <div class="container">
+                <h1>분리형 원룸 인테리어: 좁은 공간도 넓고 쾌적하게!</h1>
+                <p>2026년 최신 트렌드를 반영한 분리형 원룸 인테리어 노하우를 공개합니다. 합리적인 **비용**으로 나만의 **공간분리**를 완성하고, 만족스러운 **원룸꾸미기**를 시작해 보세요.</p>
+                <!-- 견적 요청 폼 (사용자 체류 시간 및 전환율 증대) -->
+                <div class="compare-form-box">
+                    <h2>실시간 무료 인테리어 견적 비교 신청</h2>
+                    <p>간단한 정보 입력으로 **저렴한** 인테리어 업체를 비교하고 **예상 비용**을 확인하세요.</p>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="name">이름</label>
+                            <input type="text" id="name" placeholder="이름을 입력하세요" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">연락처</label>
+                            <input type="tel" id="phone" placeholder="휴대폰 번호를 입력하세요" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="area">희망 지역</label>
+                            <select id="area" required>
+                                <option value="">지역을 선택하세요</option>
+                                <option value="서울">서울</option>
+                                <option value="경기">경기</option>
+                                <option value="인천">인천</option>
+                                <option value="부산">부산</option>
+                                <option value="대구">대구</option>
+                                <option value="광주">광주</option>
+                                <option value="대전">대전</option>
+                                <option value="울산">울산</option>
+                                <option value="세종">세종</option>
+                                <option value="강원">강원</option>
+                                <option value="충북">충북</option>
+                                <option value="충남">충남</option>
+                                <option value="경북">경북</option>
+                                <option value="경남">경남</option>
+                                <option value="전북">전북</option>
+                                <option value="전남">전남</option>
+                                <option value="제주">제주</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="cta-btn">인테리어 견적 비교 신청</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 핵심 컨텐츠: 분리형 원룸의 장점과 단점 (SEO 최적화) -->
+        <section class="content-section" id="장점과단점">
+            <div class="container">
+                <h2>분리형 원룸 인테리어: 왜 선택해야 할까?</h2>
+                <p>
+                    원룸은 하나의 공간에 침실, 거실, 주방이 모두 모여있어 생활의 편리함이 있지만, 사생활 보호나 공간의 쾌적함 측면에서는 아쉬움이 남습니다. **분리형 원룸 인테리어**는 이러한 단점을 보완하고, 좁은 공간을 최대한 **효율적으로** 활용하기 위한 가장 확실한 방법입니다. 단순히 가구를 배치하는 것을 넘어, 공간을 시각적, 기능적으로 분리하여 삶의 질을 높일 수 있습니다.
+                </p>
+
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h4><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>장점 1: 공간의 기능성 극대화</h4>
+                        <p>
+                            공간을 분리하면 각 구역이 명확한 목적을 갖게 됩니다. 침실은 수면, 거실은 휴식 및 손님 접대, 주방은 요리라는 기능에 집중할 수 있어, 전체 원룸의 활용도를 높이고 쾌적한 주거 환경을 조성합니다. 이는 **원룸 꾸미기**의 핵심 목표 중 하나입니다.
+                        </p>
+                    </div>
+                    <div class="grid-item">
+                        <h4><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>장점 2: 심리적 안정감 및 사생활 보호</h4>
+                        <p>
+                            원룸 생활의 가장 큰 어려움 중 하나는 사적인 공간과 공적인 공간의 분리가 어렵다는 점입니다. **분리형 인테리어**는 침실을 시선으로부터 차단하여 심리적인 안정감을 주며, 방문객이 왔을 때도 사생활을 보호할 수 있습니다. 이는 특히 재택근무가 늘어난 2026년 트렌드에서 더욱 중요해졌습니다.
+                        </p>
+                    </div>
+                    <div class="grid-item">
+                        <h4><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>장점 3: 냄새 및 소음 차단 효과</h4>
+                        <p>
+                            주방에서 발생하는 음식 냄새나 소음이 침실로 유입되는 것을 최소화할 수 있습니다. 유리 파티션이나 커튼을 활용한 **공간 분리**는 냄새 확산을 줄여주어 쾌적한 수면 환경을 만드는 데 큰 도움을 줍니다. 이는 특히 요리를 즐기는 1인 가구에게 큰 **장점**입니다.
+                        </p>
+                    </div>
+                    <div class="grid-item">
+                        <h4><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>단점: 잘못된 시공은 오히려 독이 될 수 있습니다.</h4>
+                        <p>
+                            하지만 **분리형 원룸 인테리어**는 잘못 시공할 경우, 오히려 좁은 공간을 더 답답하게 만들거나 동선을 비효율적으로 만들 수 있습니다. 특히 채광과 환기 문제를 고려하지 않은 파티션 설치는 공간의 질을 떨어뜨릴 수 있습니다. **저렴한곳**만 찾아 무작정 시공하기보다는, 전문적인 **견적**과 상담을 통해 신중하게 결정해야 합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 핵심 컨텐츠: 비용 및 견적 분석 (SEO 최적화) -->
+        <section class="content-section gray-bg" id="비용과견적">
+            <div class="container">
+                <h2>분리형 원룸 인테리어 비용: 평균 견적과 절감 노하우 (2026년 기준)</h2>
+                <p>
+                    많은 분들이 **원룸 인테리어 비용**에 대해 궁금해합니다. **원룸 인테리어 평균 금액**은 시공 방식에 따라 천차만별입니다. 셀프 인테리어, 부분 시공, 전체 리모델링 등 어떤 방식을 선택하느냐에 따라 **견적**이 크게 달라집니다. 2026년 기준으로, **저렴한곳**을 찾는 노하우와 **내돈내산 후기**를 바탕으로 현실적인 **예상 비용**을 분석해 드립니다.
+                </p>
+
+                <div class="tip-layout">
+                    <div class="tip-layout-text">
+                        <h3>1. 셀프 인테리어: 100~300만원 예상</h3>
+                        <p>
+                            **저렴한** **원룸꾸미기**를 원한다면 셀프 인테리어를 고려해 보세요. 주방 가구 교체나 욕실 타일 시공 같은 전문 기술이 필요한 부분만 **부분 시공**을 맡기고, 가구 배치나 소품, 페인트칠은 직접 진행하는 방식입니다. **내돈내산**으로 가구를 구입하고, 온라인 **비교**를 통해 자재를 직접 구매한다면 **비용**을 대폭 절감할 수 있습니다. 특히 **분리형 원룸**에서는 가구 파티션이나 커튼을 활용한 **공간분리**가 핵심이므로, 가구 선택에 집중하는 것이 좋습니다.
+                        </p>
+                        <h3>2. 전문 업체 부분 시공: 300~700만원 예상</h3>
+                        <p>
+                            **원룸**의 크기나 상태에 따라 **예상 비용**이 달라집니다. 낡은 원룸이라면 도배, 장판, 조명 교체 등 기본적인 수리가 필요합니다. 여기에 **분리형**으로 만들 파티션 시공을 추가하면 **평균** **견적**은 300만원을 넘어설 수 있습니다. **저렴한곳**을 찾기 위해 여러 업체의 **견적 비교**는 필수이며, 과도하게 낮은 **가격**을 제시하는 업체는 피하는 것이 좋습니다.
+                        </p>
+                    </div>
+                    <div class="tip-layout-image">
+                        <img src="https://via.placeholder.com/500x350/EAEAEA/333?text=원룸+인테리어+비용+분석+이미지" alt="원룸 인테리어 비용 분석 이미지">
+                    </div>
+                </div>
+
+                <h3>시공 범위에 따른 원룸 인테리어 예상 비용표 (2026년)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>시공 항목</th>
+                            <th>작업 내용</th>
+                            <th>평균 비용 (10평 기준)</th>
+                            <th>주의사항</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>셀프 인테리어</td>
+                            <td>가구 배치, 소품 구매, 조명 교체, 페인트칠</td>
+                            <td>100만원 ~ 300만원</td>
+                            <td>시간과 노동력 필요, 완성도 낮을 수 있음.</td>
+                        </tr>
+                        <tr>
+                            <td>부분 시공 (기본 수리)</td>
+                            <td>도배, 장판, 조명, 싱크대 교체 등</td>
+                            <td>300만원 ~ 500만원</td>
+                            <td>기존 시설 활용, **가성비** 우수.</td>
+                        </tr>
+                        <tr>
+                            <td>전체 리모델링</td>
+                            <td>위 기본 수리 + 가구 맞춤 제작, 파티션 시공, 욕실 리모델링</td>
+                            <td>500만원 ~ 1,000만원+</td>
+                            <td>**분리형** 구조 변경에 적합, 높은 만족도.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    **비용** 절감을 위해서는 여러 업체의 **견적**을 꼼꼼히 **비교**해 보는 것이 중요합니다. 특히 **원룸 인테리어 추천** 업체들이 제공하는 **견적**을 자세히 살펴보고, 숨겨진 추가 **금액**이 없는지 확인하세요.
+                </p>
+            </div>
+        </section>
+
+        <!-- 핵심 컨텐츠: 인테리어 팁 및 노하우 (SEO 최적화) -->
+        <section class="content-section" id="인테리어팁">
+            <div class="container">
+                <h2>성공적인 분리형 원룸 인테리어를 위한 2026년 트렌드 팁</h2>
+                <p>
+                    **분리형 원룸 인테리어**를 성공적으로 완성하려면 몇 가지 핵심 원칙을 지켜야 합니다. 좁은 공간을 넓어 보이게 하고, 실용성과 심미성을 모두 갖춘 **원룸꾸미기** 노하우를 소개합니다.
+                </p>
+
+                <div class="tip-layout reverse">
+                    <div class="tip-layout-text">
+                        <h3>1. 파티션 활용: 공간 분리의 핵심</h3>
+                        <p>
+                            **공간분리**의 핵심은 파티션입니다. 파티션 종류에 따라 분위기와 기능이 달라지므로 신중하게 선택해야 합니다.
+                            <ul>
+                                <li><strong>가구 파티션 (책장, 수납장):</strong> 가장 실용적인 방법입니다. 수납과 공간 분리를 동시에 해결하여 **장점**이 많습니다.</li>
+                                <li><strong>커튼 또는 가벽:</strong> 비용이 **저렴한** 편이며, 필요에 따라 열고 닫을 수 있어 유연성이 높습니다.</li>
+                                <li><strong>유리 파티션 (슬라이딩 도어):</strong> 시각적으로 개방감을 유지하면서 **분리형 원룸**을 완성할 수 있는 고급스러운 방법입니다.</li>
+                            </ul>
+                            **분리형 원룸 인테리어** 시공 **후기**를 살펴보면, 가구 파티션을 활용한 사례가 **가성비** 측면에서 높은 만족도를 보입니다.
+                        </p>
+                    </div>
+                    <div class="tip-layout-image">
+                        <img src="https://via.placeholder.com/500x350/EAEAEA/333?text=공간분리+파티션+활용+이미지" alt="공간 분리 파티션 활용 이미지">
+                    </div>
+                </div>
+
+                <div class="tip-layout">
+                    <div class="tip-layout-text">
+                        <h3>2. 다기능 가구로 공간 효율 높이기</h3>
+                        <p>
+                            좁은 **원룸**에서는 가구 하나가 여러 기능을 수행해야 합니다. 예를 들어, 침대 아래 수납공간이 있는 수납형 침대는 별도의 수납장 **비용**을 절약해 줍니다. 접이식 테이블이나 확장형 식탁은 평소에는 공간을 적게 차지하다가 필요할 때만 펼쳐서 사용할 수 있어 **장점**이 많습니다. 또한, 이동이 간편한 바퀴 달린 수납장이나 책상도 **원룸 인테리어**에서 활용도가 높습니다.
+                        </p>
+                    </div>
+                    <div class="tip-layout-image">
+                        <img src="https://via.placeholder.com/500x350/EAEAEA/333?text=다기능+가구+이미지" alt="다기능 가구 이미지">
+                    </div>
+                </div>
+
+                <div class="tip-layout reverse">
+                    <div class="tip-layout-text">
+                        <h3>3. 색상과 조명: 시각적 확장 효과</h3>
+                        <p>
+                            **분리형 원룸 인테리어**에서 가장 중요한 것은 공간이 좁아 보이지 않도록 하는 것입니다.
+                            <br><strong>[색상]</strong> 밝은 색상의 벽지와 가구를 사용하여 공간을 넓어 보이게 합니다. 특히 화이트, 베이지, 라이트 그레이와 같은 무채색은 어떤 소품과도 잘 어울립니다.
+                            <br><strong>[조명]</strong> 메인 조명 외에 스탠드나 레일 조명을 활용하여 공간마다 분위기를 다르게 연출합니다. 간접 조명을 활용하면 더욱 아늑하고 고급스러운 분위기를 연출할 수 있습니다.
+                        </p>
+                    </div>
+                    <div class="tip-layout-image">
+                        <img src="https://via.placeholder.com/500x350/EAEAEA/333?text=조명+색상+활용+이미지" alt="조명 색상 활용 이미지">
+                    </div>
+                </div>
+
+                <p style="text-align: right; font-size: 0.9em; margin-top: 50px; color: #777;">
+                    <strong>외부 신뢰성 자료 참고:</strong> 인테리어 자재 및 시공 가이드 (출처: <a href="https://www.interior-design.or.kr/" target="_blank">한국실내건축가협회</a>), 공간 활용의 중요성 (출처: <a href="https://namu.wiki/w/%EC%9D%B8%ED%85%8C%EB%A6%AC%EC%96%B4" target="_blank">나무위키</a>)
+                </p>
+            </div>
+        </section>
+
+        <!-- 핵심 컨텐츠: 지역별 인테리어 트렌드 및 추천 업체 (SEO 확장) -->
+        <section class="content-section gray-bg">
+            <div class="container">
+                <h2>지역별 분리형 원룸 인테리어 특징 및 추천</h2>
+                <p>
+                    지역별 주거 환경과 트렌드에 따라 **분리형 원룸 인테리어**의 선호도가 다릅니다. 특히 **서울**, **강남**, **홍대**, **부산** 등 주요 지역에서는 **원룸 인테리어**에 대한 관심이 높습니다. 2026년 기준으로 각 지역의 **원룸꾸미기** 트렌드를 분석하고, **저렴한곳**과 **추천** 업체를 찾는 방법을 알려드립니다.
+                </p>
+
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h4>서울/경기 (강남, 홍대, 신촌, 판교, 분당)</h4>
+                        <p>
+                            공간 효율성이 가장 중요한 지역입니다. 좁은 공간에 대한 **분리형 인테리어** 수요가 높아, 이동식 가구나 슬라이딩 파티션을 활용한 인테리어가 인기가 많습니다. **평균 비용**은 타 지역 대비 높은 편이나, **견적 비교**를 통해 합리적인 **가격**을 찾는 것이 중요합니다.
+                        </p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>부산/경남 (서면, 해운대, 창원)</h4>
+                        <p>
+                            바다와 인접한 지역 특성상, 개방감과 뷰를 살리는 인테리어가 선호됩니다. 파티션을 설치하더라도 유리 소재를 활용하여 시야를 확보하고, 채광을 중요시하는 **원룸 인테리어**가 특징입니다. **내돈내산 후기**를 보면, 쾌적함을 중시하는 경향이 있습니다.
+                        </p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>대구/경북 (동성로, 구미)</h4>
+                        <p>
+                            실용성을 중시하는 경향이 강합니다. **분리형 원룸**을 시공할 때 비용 대비 효과를 꼼꼼히 따지며, 수납공간 확보에 중점을 둔 인테리어를 선호합니다. **저렴한곳**을 찾는 소비자가 많아, 셀프 인테리어 정보 공유가 활발합니다.
+                        </p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>광주/전남 (상무지구, 여수)</h4>
+                        <p>
+                            자연 친화적인 소재나 따뜻한 감성의 인테리어가 인기가 있습니다. 원목 가구와 플랜테리어를 활용하여 아늑한 **분리형 원룸**을 꾸미는 경우가 많습니다. 지역 전문 업체 **추천**을 통해 견적을 받아보는 것이 좋습니다.
+                        </p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>대전/충청 (둔산동, 청주, 천안)</h4>
+                        <p>
+                            깔끔하고 모던한 스타일이 주류를 이룹니다. **분리형 인테리어** 시공 시 군더더기 없는 디자인과 효율적인 수납을 중시합니다. **평균 비용**은 서울/경기 지역보다 낮으나, **가성비**를 고려하는 경향이 뚜렷합니다.
+                        </p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>제주 (제주시, 서귀포)</h4>
+                        <p>
+                            제주의 독특한 주거 환경에 맞춰 감성적이고 자연적인 인테리어가 인기입니다. **분리형 원룸**에서도 넓은 창을 통한 개방감을 중시하며, 우드와 라탄 소재를 활용한 인테리어가 선호됩니다.
+                        </p>
+                    </div>
+                </div>
+                <!-- 지역 키워드 확장 (30개 이상) -->
+                <p style="text-align: right; font-size: 0.9em; margin-top: 30px; color: #777;">
+                    <strong>추가 지역 키워드:</strong> <span style="font-weight: bold;">[서울]</span> 종로, 명동, 여의도, 강동, 강서, <span style="font-weight: bold;">[경기]</span> 수원, 용인, 고양, 성남, 부천, 안산, 평택, <span style="font-weight: bold;">[인천]</span> 송도, 청라, <span style="font-weight: bold;">[부산]</span> 동래, 남포, <span style="font-weight: bold;">[대구]</span> 수성구, <span style="font-weight: bold;">[광주]</span> 동구, 북구, <span style="font-weight: bold;">[대전]</span> 유성구, <span style="font-weight: bold;">[강원]</span> 춘천, 강릉, <span style="font-weight: bold;">[충북]</span> 청주, 충주, <span style="font-weight: bold;">[충남]</span> 아산, 천안, <span style="font-weight: bold;">[경북]</span> 포항, 구미, <span style="font-weight: bold;">[경남]</span> 창원, 김해, <span style="font-weight: bold;">[전북]</span> 전주, 익산, <span style="font-weight: bold;">[전남]</span> 목포, 순천 등
+                </p>
+            </div>
+        </section>
+
+        <!-- 함께 많이 찾는 키워드 (SEO 랭킹 강화) -->
+        <section class="content-section" style="padding: 40px 0;">
+            <div class="container">
+                <h3 style="text-align: center; color: var(--secondary-color); margin-bottom: 30px;">함께 많이 찾는 검색어: 분리형 원룸 인테리어 관련 키워드</h3>
+                <ul class="keyword-list">
+                    <li>#분리형원룸</li>
+                    <li>#원룸공간분리</li>
+                    <li>#원룸인테리어팁</li>
+                    <li>#원룸꾸미기견적</li>
+                    <li>#원룸인테리어장단점</li>
+                    <li>#분리형원룸가격</li>
+                    <li>#원룸인테리어순위</li>
+                    <li>#원룸인테리어내돈내산</li>
+                    <li>#원룸인테리어저렴한곳</li>
+                    <li>#원룸인테리어추천</li>
+                    <li>#파티션인테리어</li>
+                    <li>#원룸리모델링비용</li>
+                    <li>#셀프인테리어비교</li>
+                    <li>#2026원룸인테리어트렌드</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- FAQ 섹션 (SEO 스니펫 및 사용자 만족도) -->
+        <section class="content-section gray-bg" id="faq">
+            <div class="container">
+                <h2>자주 묻는 질문 (FAQ)</h2>
+                <div class="faq-item">
+                    <h3 id="q1">Q. 분리형 원룸 인테리어 시공을 맡길 때 **견적**은 어떻게 **비교**해야 하나요?</h3>
+                    <p>
+                        A. 여러 업체의 **견적**을 받을 때, 단순히 최종 **금액**만 비교하지 말고 견적서 내역을 꼼꼼히 살펴보세요. 자재 등급, 시공 범위, 추가 **비용** 발생 여부 등을 확인하여 합리적인 **가격**인지 판단해야 합니다. **저렴한곳**만 고집하기보다는, **후기**가 좋고 신뢰할 수 있는 업체인지 확인하는 것이 중요합니다.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 id="q2">Q. 좁은 원룸에서 **공간분리**를 할 때 가장 피해야 할 **단점**은 무엇인가요?</h3>
+                    <p>
+                        A. 좁은 공간에 억지로 가벽을 세우거나 파티션을 설치하여 **공간분리**를 하면, 오히려 시야를 가로막아 더 답답하게 느껴질 수 있습니다. 또한, 채광과 환기까지 막아버리면 쾌적성이 크게 떨어집니다. 투명한 유리 파티션이나 커튼, 가벼운 책장 등을 활용하여 시각적 개방감을 유지하는 것이 좋습니다.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 id="q3">Q. **분리형 원룸** 인테리어 시 **수납공간** 확보가 중요한 이유는 무엇인가요?</h3>
+                    <p>
+                        A. **원룸**에서는 물건이 밖에 나와 있을 경우 쉽게 지저분해 보이기 때문에 **수납공간** 확보가 중요합니다. 침대 하부 수납장, 벽 선반, 다기능 가구 등을 활용하여 겉으로 보이는 물건의 양을 최소화하면 **분리형**으로 만든 공간이 더욱 깔끔하고 넓어 보입니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section" style="background-color: var(--primary-color);">
+            <div class="container">
+                <p style="text-align: center; color: #fff; line-height: 1.8;">
+                    본 페이지는 <strong>분리형원룸인테리어</strong>에 대한 정보를 제공하며, 특정 업체나 상품을 추천하지 않습니다. <br>
+                    정확한 견적 및 시공은 여러 전문 업체의 상담을 통해 신중하게 결정하시기 바랍니다. <br>
+                    <a href="https://www.law.go.kr/lsInfoP.do?lsiSeq=275005&efYd=20250101#0000" target="_blank">주택법 및 건축법</a> | <a href="https://www.kostat.go.kr/portal/korea/kor_nw/2/6/1/index.board?bmode=read&aSeq=432657" target="_blank">통계청 주택 유형별 인구조사</a> <br>
+                    Copyright &copy; 2026. 분리형원룸인테리어. All Rights Reserved.
+                </p>
+            </div>
+        </section>
     </main>
-  </body>
-</html>
+
+    <script>
+        // FAQ 토글 기능 (사용자 경험 개선)
+        document.querySelectorAll('.faq-item h3').forEach(item => {
+            item.addEventListener('click', event => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+    </script>
+
+  
